@@ -1,0 +1,10 @@
+####################
+#### IMPORTANT #####
+####################
+# Make sure to update .npmignore and .dockerignore when updating this file.
+
+/node_modules
+/built
+.idea
+npm-debug.log
+.DS_Store
