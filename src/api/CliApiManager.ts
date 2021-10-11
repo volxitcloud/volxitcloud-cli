@@ -22,23 +22,23 @@ function hashCode(str: string) {
 export default class CliApiManager {
     static instances: IHashMapGeneric<ApiManager> = {}
 
-    static get(capMachine: IMachine) {
-        const hashKey = 'v' + hashCode(capMachine.baseUrl)
+    static get(volxMachine: IMachine) {
+        const hashKey = 'v' + hashCode(volxMachine.baseUrl)
         if (!CliApiManager.instances[hashKey]) {
             CliApiManager.instances[hashKey] = new ApiManager(
-                capMachine.baseUrl + Constants.BASE_API_PATH,
-                capMachine.appToken,
+                volxMachine.baseUrl + Constants.BASE_API_PATH,
+                volxMachine.appToken,
                 function(token) {
-                    capMachine.authToken = token
-                    if (capMachine.name) {
-                        StorageHelper.get().saveMachine(capMachine)
+                    volxMachine.authToken = token
+                    if (volxMachine.name) {
+                        StorageHelper.get().saveMachine(volxMachine)
                     }
                     return Promise.resolve()
                 }
             )
         }
 
-        CliApiManager.instances[hashKey].setAuthToken(capMachine.authToken)
+        CliApiManager.instances[hashKey].setAuthToken(volxMachine.authToken)
 
         return CliApiManager.instances[hashKey]
     }
